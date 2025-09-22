@@ -18,6 +18,8 @@ import matplotlib.pyplot as plt # For plotting graphs
 import seaborn as sns           # For statistical visualizations
 import os                       # For operating system operations
 import tensorflow as tf         # For deep learning
+import pickle
+import joblib
 
 # Disable TensorFlow optimization warnings (optional)
 os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
@@ -27,6 +29,7 @@ from tensorflow.keras.models import Model
 from tensorflow.keras.layers import Input, LSTM, Dense, Embedding, Layer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.utils import to_categorical
+from tensorflow.keras.models import load_model
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics import classification_report, confusion_matrix
@@ -314,8 +317,25 @@ def main():
     y_pred, y_pred_prob = evaluate_model(model, X_test, y_test)
     
     # Save the trained model
-    model.save('hdfs_anomaly_model.h5')
-    print("\nModel saved as 'hdfs_anomaly_model.h5'")
+    save_dir = "Saved_ModelAndArtifacts"
+    os.makedirs(save_dir, exist_ok=True)
+    model_save_path = os.path.join(save_dir, "HDFS_Anomaly_Model.h5")
+    model.save(model_save_path, save_format = "h5")
+
+    # Save the model weights
+    weights_save_path = os.path.join(save_dir, "HDFS_Model_weights.h5")
+    model.save_weights(weights_save_path)
+    print("\nModel saved as 'HDFS_Model_weights.h5'")
+
+    # Save Label Encoder
+    label_encoder_path = os.path.join(save_dir, "Label_Encoder.joblib")
+    joblib.dump(LabelEnc, label_encoder_path)
+
+    # Save Drain3 Parser
+    drain_state_path = os.path.join(save_dir, "Drain3_State.pkl")
+    with open(drain_state_path, "wb") as f:
+        pickle.dump(template_miner, f)
+
     
     # Show some example predictions
     print("\nExample Predictions:")

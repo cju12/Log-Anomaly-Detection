@@ -14,12 +14,13 @@ import pandas as pd
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from datasets.Preprocessing import initialize_data
+from Detection_Model import AttentionLayer
 
 # Initialize the preprocessed data
 X_padded, y, vocab_size, LabelEnc, grouped = initialize_data()
 import matplotlib.pyplot as plt
 
-def load_trained_model(model_path='hdfs_anomaly_model.h5'):
+def load_trained_model(model_path='Saved_ModelAndArtifacts/HDFS_Anomaly_Model.h5'):
     """
     Load the trained anomaly detection model
     
@@ -30,7 +31,10 @@ def load_trained_model(model_path='hdfs_anomaly_model.h5'):
     - Loaded Keras model
     """
     try:
-        model = load_model(model_path)
+        model = load_model(
+            model_path,
+            custom_objects={"AttentionLayer": AttentionLayer}
+        )
         print(f"Model loaded successfully from {model_path}")
         return model
     except Exception as e:
@@ -99,7 +103,7 @@ def analyze_sample_blocks(model, num_samples=10):
             # Display results
             actual_str = "Anomaly" if actual_label == 1 else "Normal"
             pred_str = "Anomaly" if pred_label == 1 else "Normal"
-            status = "✓" if is_correct else "✗"
+            status = "O" if is_correct else "X"
             
             print(f"{i+1:2d}. Block: {block_id}")
             print(f"    Events: {event_sequence[:5]}... ({len(event_sequence)} total)")
