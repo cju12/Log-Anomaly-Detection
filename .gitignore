@@ -44,12 +44,13 @@ venv.bak/
 saved_model/
 logs/
 
-# Data files (you might want to keep some)
+# Data files (exclude large log files)
+datasets/HDFS.log
+datasets/HDFS.log_structured.csv
+datasets/anomaly_label.csv
+
+# Other log files
 *.log
-*.csv
-# Uncomment if you want to exclude all data files
-# datasets/*.log
-# datasets/*.csv
 
 # Model outputs
 *.png

@@ -24,6 +24,18 @@ Raw HDFS Logs → Parsing → Preprocessing → Model Training → Anomaly Detec
 3. **Model Training** (`Detection_Model.py`): Trains the neural network
 4. **Prediction** (`predict_anomalies.py`): Uses trained model for detection
 
+## 📊 Data Requirements
+
+This project requires two main data files:
+
+1. **HDFS.log**: Raw HDFS log file containing system events
+2. **anomaly_label.csv**: Labels indicating which blocks are normal/anomalous
+
+**Getting the Data:**
+- Original HDFS dataset: [LogHub HDFS Dataset](https://github.com/logpai/loghub/tree/master/HDFS)
+- Place `HDFS.log` in the `datasets/` directory
+- Place `anomaly_label.csv` in the `datasets/` directory
+
 ## 📁 Project Structure
 
 ```
@@ -49,7 +61,17 @@ pip install tensorflow pandas numpy matplotlib seaborn scikit-learn drain3
 
 ### Step 1: Prepare Your Data
 
-Place your HDFS log file as `datasets/HDFS.log` and labels as `datasets/anomaly_label.csv`.
+**Required Data Files:**
+- `datasets/HDFS.log` - Your raw HDFS log file
+- `datasets/anomaly_label.csv` - Labels file with BlockId and Label columns
+
+**Note:** The actual data files are not included in this repository due to size constraints. Sample files are provided:
+- `datasets/sample_HDFS.log` - Shows expected log format
+- `datasets/sample_anomaly_label.csv` - Shows expected label format
+
+**Data Format:**
+- HDFS.log: Raw log lines with timestamps, log levels, and messages
+- anomaly_label.csv: CSV with columns `BlockId,Label` where Label is "Normal" or "Anomaly"
 
 ### Step 2: Train the Model
 
