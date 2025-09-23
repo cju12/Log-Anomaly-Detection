@@ -60,9 +60,9 @@ class ParsedHDFS:
         self.grouped["Label"] = self.grouped["BlockId"].map(label_dict).apply(lambda x: 1 if x == "Anomaly" else 0)
 
         for i in range(5):
-            print(f"[{i+1}] block: {self.grouped.iloc[i]["BlockId"]}")
-            print(f"event: {self.grouped.iloc[i]["EventId"][:5]}...")
-            print(f"label: {self.grouped.iloc[i]["Label"]} 0=normal, 1=anomaly")
+            print(f"[{i+1}] block: {self.grouped.iloc[i]['BlockId']}")
+            print(f"event: {self.grouped.iloc[i]['EventId'][:5]}...")
+            print(f"label: {self.grouped.iloc[i]['Label']} 0=normal, 1=anomaly")
     
     def get_grouped_data(self):
         return self.grouped

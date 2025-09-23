@@ -30,6 +30,7 @@ from tensorflow.keras.models import Model
 from tensorflow.keras.layers import Input, LSTM, Dense, Embedding, Layer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.utils import to_categorical
+from tensorflow.keras.models import load_model
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics import classification_report, confusion_matrix

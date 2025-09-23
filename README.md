@@ -62,10 +62,11 @@ pip install tensorflow pandas numpy matplotlib seaborn scikit-learn drain3
 ### Step 1: Prepare Your Data
 
 **Required Data Files:**
+- `Logpai/loghub` - This project's system log datasets are from loghub, so required data files can be downloaded in https://github.com/logpai/loghub
 - `datasets/HDFS.log` - Your raw HDFS log file
 - `datasets/anomaly_label.csv` - Labels file with BlockId and Label columns
 
-**Note:** The actual data files are not included in this repository due to size constraints. Sample files are provided:
+**Note:** The actual data files are not included in this repository due to size constraints. 
 - `datasets/sample_HDFS.log` - Shows expected log format
 - `datasets/sample_anomaly_label.csv` - Shows expected label format
 
